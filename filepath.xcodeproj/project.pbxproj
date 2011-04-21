@@ -64,8 +64,6 @@
 				C6859EA2029092E104C91782 /* Documentation */,
 				08FB779DFE84155DC02AAC07 /* External Frameworks and Libraries */,
 				1AB674ADFE9D54B511CA2CBB /* Products */,
-				58FB4A7E135FC9F6000413C3 /* CopyLaunchedApplicationsInFrontToBackOrder.h */,
-				58FB4A7F135FC9F6000413C3 /* CopyLaunchedApplicationsInFrontToBackOrder.c */,
 			);
 			name = docpath;
 			sourceTree = "<group>";
@@ -73,6 +71,8 @@
 		08FB7795FE84155DC02AAC07 /* Source */ = {
 			isa = PBXGroup;
 			children = (
+				58FB4A7E135FC9F6000413C3 /* CopyLaunchedApplicationsInFrontToBackOrder.h */,
+				58FB4A7F135FC9F6000413C3 /* CopyLaunchedApplicationsInFrontToBackOrder.c */,
 				32A70AAB03705E1F00C91783 /* filepath_Prefix.pch */,
 				08FB7796FE84155DC02AAC07 /* filepath.m */,
 				58FB4AAF135FCD97000413C3 /* DocumentPath.h */,
