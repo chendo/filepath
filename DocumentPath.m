@@ -12,7 +12,7 @@
 @implementation DocumentPath
 
 +(NSArray *) documentPathsForMostRecentApp {
-    NSArray *appsInOrder = CopyLaunchedApplicationsInFrontToBackOrder();
+    NSArray *appsInOrder = (NSArray *)CopyLaunchedApplicationsInFrontToBackOrder();
     for(int i=0; i<appsInOrder.count; i++) {
         NSDictionary *app = [appsInOrder objectAtIndex:i];
         NSArray *paths = [self documentPathsForPID:[[app objectForKey:@"pid"] integerValue]];
@@ -59,7 +59,7 @@
     
     for(int i=0; i<[windows count]; i++) {
         NSString *path;
-        AXUIElementCopyAttributeValue([windows objectAtIndex:i], kAXDocumentAttribute, &path);
+        AXUIElementCopyAttributeValue((AXUIElementRef)[windows objectAtIndex:i], kAXDocumentAttribute, &path);
         if (path == NULL)
             continue;
         path = [[NSURL URLWithString:path] path];
