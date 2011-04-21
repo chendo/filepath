@@ -15,7 +15,8 @@ int main (int argc, const char * argv[]) {
     
     if (argc > 1) {
         int appIndex = 1;
-        // Check for -f
+        // TODO: Someone needs to write me an option parser cause I'm going to add more options later.
+        // Check for -f(irst)
         if (argc == 3) {
             if (strcmp(argv[1], "-f") == 0) {
                 firstFlag = true;
