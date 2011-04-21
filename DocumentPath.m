@@ -1,11 +1,3 @@
-//
-//  DocumentPath.m
-//  docpath
-//
-//  Created by Jack Chen on 21/04/11.
-//  Copyright 2011 Envato. All rights reserved.
-//
-
 #import "DocumentPath.h"
 
 
@@ -54,12 +46,12 @@
     AXUIElementRef app = AXUIElementCreateApplication((pid_t)pid);
     
     NSArray* windows;
-    AXUIElementCopyAttributeValues(app, kAXWindowsAttribute, 0, 10, &windows);
+    AXUIElementCopyAttributeValues(app, kAXWindowsAttribute, 0, 10, (CFArrayRef *)&windows);
     NSMutableArray* paths = [NSMutableArray arrayWithCapacity: [windows count]];
     
     for(int i=0; i<[windows count]; i++) {
         NSString *path;
-        AXUIElementCopyAttributeValue((AXUIElementRef)[windows objectAtIndex:i], kAXDocumentAttribute, &path);
+        AXUIElementCopyAttributeValue((AXUIElementRef)[windows objectAtIndex:i], kAXDocumentAttribute, (CFTypeRef *)&path);
         if (path == NULL)
             continue;
         path = [[NSURL URLWithString:path] path];

@@ -1,12 +1,13 @@
 #include "CopyLaunchedApplicationsInFrontToBackOrder.h"
-// From https://gist.github.com/163918
 
+// From https://gist.github.com/163918
 /*
  * Returns an array of CFDictionaryRef types, each of which contains information about one of the processes.
  * The processes are ordered in front to back, i.e. in the same order they appear when typing command + tab, from left to right.
  * See the ProcessInformationCopyDictionary function documentation for the keys used in the dictionaries.
  * If something goes wrong, then this function returns NULL.
  */
+
 CFArrayRef CopyLaunchedApplicationsInFrontToBackOrder(void)
 {    
     CFArrayRef (*_LSCopyApplicationArrayInFrontToBackOrder)(uint32_t sessionID) = NULL;
