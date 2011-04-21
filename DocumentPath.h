@@ -5,7 +5,7 @@
 
 }
 
-+(NSArray *) documentPathsForMostRecentApp;
++(NSArray *) documentPathsForMostRecentApp:(NSString **)appName;
 +(NSArray *) documentPathsForAppName:(NSString *)appName;
 +(NSArray *) documentPathsForPID:(int) pid;
 +(NSArray *) documentPathsForBundleID:(NSString *) bundleID;
