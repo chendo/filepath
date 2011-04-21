@@ -11,8 +11,23 @@ int main (int argc, const char * argv[]) {
     
     NSArray *paths;
     NSString *appName;
+    bool firstFlag = false;
+    
     if (argc > 1) {
-        paths = [DocumentPath documentPathsForAppName:[NSString stringWithCString:argv[1]]];
+        int appIndex = 1;
+        // Check for -f
+        if (argc == 3) {
+            if (strcmp(argv[1], "-f") == 0) {
+                firstFlag = true;
+                appIndex = 2;
+            }
+            else {
+                fprintf(stderr, "Unrecognised option.\nUsage: filepath [-f] [application name]\n  -f\tdefault to first file\n");
+                return 1;
+            }
+        }
+               
+        paths = [DocumentPath documentPathsForAppName:[NSString stringWithCString:argv[appIndex]]];
     }
     else {
         paths = [DocumentPath documentPathsForMostRecentApp:&appName];
@@ -30,7 +45,7 @@ int main (int argc, const char * argv[]) {
     if (appName)
         fprintf(stderr, "Getting path(s) from %s...\n", [appName cString]);
     
-    if (paths.count == 1) {
+    if ( (paths.count == 1) || firstFlag) {
         printf("%s\n", [[paths objectAtIndex:0] cString]);
     } else {
         fprintf(stderr, "Multiple paths found:\n");

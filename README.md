@@ -35,8 +35,19 @@ suggest `/usr/local/bin`).
 
 I'll probably write a recipe for homebrew at some point.
 
-This requires Snow Leopard (10.6) and if you somehow don't have Snow
-Leopard, upgrade already.
+This requires Snow Leopard (10.6) and access for assistive devices must
+be enabled in Accessibility.
+
+This only works on applications that use NSDocument. Let me know if it
+doesn't work for an application with a draggable handle in the title bar.
+
+If you somehow don't have Snow Leopard, upgrade already.
+
+## Usage
+
+    $ filepath          # Finds the most recently used window that has documents
+    $ filepath textmate # Gets documents from Textmate
+    $ filepath -f       # Always picks the first choice
 
 ## Bonus!
 
@@ -51,9 +62,11 @@ time I drag a file into the terminal.
 
 ## Changelog
 
-* v0.1
+* v0.2
+  * Added -f option.
 
-First release.
+* v0.1
+  * First release.
 
 ## Contribute
 
