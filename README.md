@@ -29,7 +29,11 @@ You get a choice! `filepath` is democratic like that.
 
 ## Want it?
 
-You can grab it from the [downloads page](https://github.com/chendo/filepath/downloads) or build it yourself.
+You can grab it from the [downloads page](https://github.com/chendo/filepath/downloads)
+or build it yourself, then slap it in any directory in your $PATH (I
+suggest `/usr/local/bin`).
+
+I'll probably write a recipe for homebrew at some point.
 
 This requires Snow Leopard (10.6) and if you somehow don't have Snow
 Leopard, upgrade already.
@@ -43,6 +47,13 @@ Alias it to `fp` for even less typing.
 I like being efficient. I'd rather spend an hour or two writing a tool
 making me more efficient in the long run than waste two seconds every
 time I drag a file into the terminal.
+
+
+## Changelog
+
+* v0.1
+
+First release.
 
 ## Contribute
 
