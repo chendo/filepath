@@ -18,8 +18,6 @@ int main (int argc, const char * argv[]) {
         paths = [DocumentPath documentPathsForMostRecentApp:&appName];
     }
     
-    paths = [paths sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)];
-    
     if (paths.count == 0) {
         if (argc > 1) {
             fprintf(stderr, "No paths found for %s; either application not found or does not use NSDocuments\n", argv[1]);
