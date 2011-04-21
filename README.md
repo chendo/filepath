@@ -12,7 +12,7 @@ using the mouse unless absolutely necessary?
 Sure, you might say "I'd just type and tab complete that shit." But let's
 just imagine that file is really deep in the project hierarchy
 or just really damn annoying to autocomplete because there's a billion
-things with the same prefixes.
+files with the same prefixes.
 
 Now, let's take a look at your coding life with `filepath`.
 
@@ -33,6 +33,10 @@ You can grab it from the [downloads page](https://github.com/chendo/filepath/dow
 
 This requires Snow Leopard (10.6) and if you somehow don't have Snow
 Leopard, upgrade already.
+
+## Bonus!
+
+Alias it to `fp` for even less typing.
 
 ## Why?
 
