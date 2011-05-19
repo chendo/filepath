@@ -5,15 +5,20 @@
 
 +(NSArray *) documentPathsForMostRecentApp:(NSString **)appName {
     NSArray *appsInOrder = (NSArray *)CopyLaunchedApplicationsInFrontToBackOrder();
+    NSArray *paths;
     for(int i=0; i<appsInOrder.count; i++) {
         NSDictionary *app = [appsInOrder objectAtIndex:i];
-        NSArray *paths = [self documentPathsForPID:[[app objectForKey:@"pid"] integerValue]];
+        paths = [self documentPathsForPID:[[app objectForKey:@"pid"] integerValue]];
         
         *appName = [app objectForKey:@"CFBundleName"];
-        if (paths.count > 0)
+        if (paths.count > 0) {
+            [appsInOrder release];
             return paths;
+        }
+
     }
     *appName = NULL;
+    [appsInOrder release];
     return NULL;
 }
 
