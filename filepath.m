@@ -1,7 +1,19 @@
 #import <Foundation/Foundation.h>
 #import "DocumentPath.h"
+#include <getopt.h>
 
-int main (int argc, const char * argv[]) {
+int choose = false;
+int verbose = false;
+static char *version = "0.3";
+
+static struct option long_options[] = {
+    {"verbose", no_argument, &verbose,     true},
+    {"choose",  no_argument, &choose,      true},
+    {"help",    no_argument, 0,            'h'},
+    {0, 0, 0, 0}
+};
+
+int main (int argc, char **argv) {
     NSAutoreleasePool * pool = [[NSAutoreleasePool alloc] init];
 
     if (!AXAPIEnabled()) {
@@ -10,25 +22,42 @@ int main (int argc, const char * argv[]) {
     }
     
     NSArray *paths;
-    NSString *appName;
-    bool firstFlag = false;
+    NSString *appName = NULL;
     
-    if (argc > 1) {
-        int appIndex = 1;
-        // TODO: Someone needs to write me an option parser cause I'm going to add more options later.
-        // Check for -f(irst)
-        if (argc == 3) {
-            if (strcmp(argv[1], "-f") == 0) {
-                firstFlag = true;
-                appIndex = 2;
-            }
-            else {
-                fprintf(stderr, "Unrecognised option.\nUsage: filepath [-f] [application name]\n  -f\tdefault to first file\n");
-                return 1;
-            }
+    opterr = 0;
+    
+    int c, option_index;
+    
+    while ( (c = getopt_long(argc, argv, "cvh", long_options, &option_index)) != -1) {
+        switch (c) {
+            case 'c':
+                choose = true;
+                break;
+            case 'v':
+                verbose = true;
+                break;
+            case '?':
+                fprintf(stderr, "Invalid options.\n\n");
+            case 'h':        
+                fprintf(stderr, "filepath v%s\n"
+                        "Usage: filepath [<options>] [application name]\n"
+                        "Prints the path of an opened file in OS X.\n\n"
+                        "By default, it prints the path from the most recent application window with a document.\n"
+                        "e.g., `filepath` returns \"/Users/chendo/foo.txt\"\n\n"
+                        "You are also able to specify which app to use:\n"
+                        "`filepath MacVim` pulls the path from MacVim\n\n"
+                        "Options:\n"
+                        "  -c, --choose     choose from a list of open files if more than one\n"
+                        "  -v, --verbose    show which application the path is coming from\n\n"
+                        "More information, support and tips & tricks at http://github.com/chendo/filepath\n", version);
+                return 1;                    
         }
-               
-        paths = [DocumentPath documentPathsForAppName:[NSString stringWithCString:argv[appIndex]]];
+    }
+    
+    // If there is an extra argument
+    if (optind + 1 <= argc)
+    {
+        paths = [DocumentPath documentPathsForAppName:[NSString stringWithUTF8String:argv[optind]]];
     }
     else {
         paths = [DocumentPath documentPathsForMostRecentApp:&appName];
@@ -43,10 +72,10 @@ int main (int argc, const char * argv[]) {
         return 1;
     }
     
-    if (appName)
-        fprintf(stderr, "Getting path(s) from %s...\n", [appName cString]);
+    if (appName && verbose)
+        fprintf(stderr, "Getting path(s) from %s...\n", [appName UTF8String]);
     
-    if ( (paths.count == 1) || firstFlag) {
+    if ( (paths.count == 1) || choose == false) {
         printf("%s\n", [[paths objectAtIndex:0] cString]);
     } else {
         fprintf(stderr, "Multiple paths found:\n");

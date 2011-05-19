@@ -43,15 +43,38 @@ doesn't work for an application with a draggable handle in the title bar.
 
 If you somehow don't have Snow Leopard, upgrade already.
 
-## Usage
+## Basic Usage (which there's not much point to)
 
-    $ filepath          # Finds the most recently used window that has documents
+    $ filepath          # Gets the path from the most recently used window
+                        # that has a document
+    /Users/chendo/foo.txt
+
     $ filepath textmate # Gets documents from Textmate
-    $ filepath -f       # Always picks the first choice
+    /Users/chendo/opened_in_textmate.txt
 
-## Bonus!
+    $ filepath --verbose
+    Getting path from MacVim...
+    /Users/chendo/foo.txt
 
-Alias it to `fp` for even less typing.
+    $ filepath --choose # Gives you the option to pick which file to
+                        # output to stdout
+    Multiple paths found:
+    1: /Users/chendo/foo.txt
+    2: /Users/chendo/bar.txt
+    Enter choice: 2
+    /Users/chendo/bar.txt
+
+## Intended Usage
+
+    $ alias fp=filepath       # For the lazy
+    $ cucumber `fp`
+    $ spec `fp`
+    $ git add `fp`
+
+And so on and so forth. If you use `zsh`, then you can do:
+
+    $ cucumber `fp`<TAB>     # And zsh will replace `fp` with the actual path and becomes:
+    $ cucumber /Users/chendo/awesome.feature
 
 ## Why?
 
@@ -61,6 +84,14 @@ time I drag a file into the terminal.
 
 
 ## Changelog
+
+* v0.3
+  * Now using getopt_long for option parsing goodness
+  * Silenced the output by default to make it more zsh backtick
+    subsitution-friendly.
+  * Added --verbose
+  * Picks the first file by default unless --choose is selected
+  * Added Usage and help
 
 * v0.2
   * Added -f option.
